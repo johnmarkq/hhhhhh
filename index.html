@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="heart.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <h1>Wanna date me? 💕</h1>
@@ -20,12 +21,19 @@
         const quoteText = document.getElementById('quoteText');
 
         window.onload = () => {
-            const proceed = confirm(
-                "Caution: Clicking 'No' may trigger random quotes, which might include slightly inappropriate words. Do you want to proceed?"
-            );
-            if (!proceed) {
-                document.body.innerHTML = "<h1>Thank you for visiting!</h1>";
-            }
+            Swal.fire({
+                title: 'Caution!',
+                text: "Clicking 'No' may trigger random quotes, which might include slightly inappropriate words. Do you want to proceed?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, proceed',
+                cancelButtonText: 'No, leave',
+                reverseButtons: true
+            }).then((result) => {
+                if (!result.isConfirmed) {
+                    document.body.innerHTML = "<h1>Thank you for visiting!</h1>";
+                }
+            });
         };
 
         async function getRandomSweetQuote() {
