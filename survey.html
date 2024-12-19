@@ -2,12 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Date Survey</title>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
+    <div class="logo-container">
+        <a href="https://youtu.be/dQw4w9WgXcQ?si=G4E0IG8_UsKdJjHa" target="_blank">
+            <div class="heart-container">
+                <img src="heart.png" alt="Love Logo" class="heart-image"> 
+                <span class="click-me">Click me</span>
+            </div>
+        </a>
+        <h1 class="kupal">Love</h1>
+    </div>
+    <br>
+
     <h1>Let’s plan the date!</h1>
 
     <div class="selection" id="selectionContainer">
@@ -100,6 +111,7 @@
                     icon: 'error',
                     confirmButtonText: 'Okay'
                 });
+            
                 console.error('Error with fetch request:', error);
             }
         }
