@@ -8,14 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="logo-container">
-        <a href="https://youtu.be/dQw4w9WgXcQ?si=G4E0IG8_UsKdJjHa" target="_blank">
-            <div class="heart-container">
-                <img src="heart.png" alt="Love Logo" class="heart-image"> 
-                <span class="click-me">Click me</span>
-            </div>
-        </a>
-        <h1 class="kupal">Love</h1>
+    
     </div>
     <br>
 
@@ -57,64 +50,68 @@
 
     <script>
         async function confirmDate() {
-            const day = document.getElementById('day').value;
-            const time = document.getElementById('time').value;
-            const place = document.getElementById('place').value;
-            const notes = document.getElementById('notes').value;
+    const day = document.getElementById('day').value;
+    const time = document.getElementById('time').value;
+    const place = document.getElementById('place').value;
+    const notes = document.getElementById('notes').value;
 
-            const dateData = {
-                content: `\`\`\`diff\n**Date Plan Confirmation**\n\n**Day**: ${day}\n**Time**: ${time}\n**Place**: ${place}\n\n**Message**: ${notes || 'No message'}\n\`\`\``
-            };
+    const dateData = {
+        content: `\`\`\`diff\n**Date Plan Confirmation**\n\n**Day**: ${day}\n**Time**: ${time}\n**Place**: ${place}\n\n**Message**: ${notes || 'No message'}\n\`\`\``
+    };
 
-            const webhookUrl = 'https://discord.com/api/webhooks/1202997008466706474/LoehfWDU1nkmkW6vY9s-oJd39TpF-8bwnrhyWOTA2gWU-1iP0NNSQhybkSseDtAoy3H-';
+    const webhookUrl = 'https://discord.com/api/webhooks/1202997008466706474/LoehfWDU1nkmkW6vY9s-oJd39TpF-8bwnrhyWOTA2gWU-1iP0NNSQhybkSseDtAoy3H-';
 
-            Swal.fire({
-                title: 'Sending...',
-                text: 'Please wait while we confirm your date.',
-                icon: 'info',
-                allowOutsideClick: false,
-                showConfirmButton: false,
-                willOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            try {
-                const response = await fetch(webhookUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(dateData),
-                });
-
-                if (response.ok) {
-                    Swal.fire({
-                        title: 'Success!',
-                        text: 'Your date has been confirmed and sent to Discord!',
-                        icon: 'success',
-                        confirmButtonText: 'Okay'
-                    });
-                } else {
-                    const errorResponse = await response.json();
-                    Swal.fire({
-                        title: 'Error!',
-                        text: `There was an issue sending the data: ${errorResponse.message || 'Unknown error'}`,
-                        icon: 'error',
-                        confirmButtonText: 'Try Again'
-                    });
-                }
-            } catch (error) {
-                Swal.fire({
-                    title: 'Error!',
-                    text: 'Error sending data to webhook. Please try again later.',
-                    icon: 'error',
-                    confirmButtonText: 'Okay'
-                });
-            
-                console.error('Error with fetch request:', error);
-            }
+    Swal.fire({
+        title: 'Sending...',
+        text: 'Please wait while we confirm your date.',
+        icon: 'info',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        willOpen: () => {
+            Swal.showLoading();
         }
+    });
+
+    try {
+        const response = await fetch(webhookUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dateData),
+        });
+
+        if (response.ok) {
+            Swal.fire({
+                title: 'Success!',
+                text: 'Your date has been confirmed and sent to Discord!',
+                icon: 'success',
+                confirmButtonText: 'Okay'
+            }).then(() => {
+                // Redirect to the video after clicking "Okay"
+                window.location.href = "https://youtu.be/dQw4w9WgXcQ?si=B6_DBAlQLFiyJkMe";
+            });
+        } else {
+            const errorResponse = await response.json();
+            Swal.fire({
+                title: 'Error!',
+                text: `There was an issue sending the data: ${errorResponse.message || 'Unknown error'}`,
+                icon: 'error',
+                confirmButtonText: 'Try Again'
+            });
+        }
+    } catch (error) {
+        Swal.fire({
+            title: 'Error!',
+            text: 'Error sending data to webhook. Please try again later.',
+            icon: 'error',
+            confirmButtonText: 'Okay'
+        });
+    
+        console.error('Error with fetch request:', error);
+    }
+}
+
     </script>
 </body>
 </html>
